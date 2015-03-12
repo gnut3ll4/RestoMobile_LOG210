@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RestoMobile</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="server">192.168.1.118</string>
+
+</resources>
