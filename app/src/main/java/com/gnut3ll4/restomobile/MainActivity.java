@@ -4,14 +4,38 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements Callback {
+
+    private TextView tvTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        tvTest = (TextView) findViewById(R.id.tv_test);
+
+
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(getString(R.string.server))
+                .build();
+
+        WebService service = restAdapter.create(WebService.class);
+
+
+        service.helloWorld(this);
+
+
+
+
     }
 
 
@@ -35,5 +59,18 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void success(Object o, Response response) {
+
+        TestHello testHello = (TestHello) o;
+
+        tvTest.setText(testHello.hello);
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+        tvTest.setText(error.getMessage());
     }
 }
