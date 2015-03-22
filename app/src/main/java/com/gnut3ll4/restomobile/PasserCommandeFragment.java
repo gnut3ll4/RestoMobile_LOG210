@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.gnut3ll4.restomobile.model.TestHello;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -51,7 +53,7 @@ public class PasserCommandeFragment extends Fragment implements Callback {
 
         TestHello testHello = (TestHello) o;
 
-        tvTest.setText(testHello.hello);
+        tvTest.setText(testHello.getHello());
     }
 
     @Override

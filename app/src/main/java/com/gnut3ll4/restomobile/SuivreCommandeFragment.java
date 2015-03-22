@@ -5,33 +5,25 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.gnut3ll4.restomobile.model.Restaurant;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * Use the {@link SuivreCommandeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SuivreCommandeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+import java.util.ArrayList;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+public class SuivreCommandeFragment extends Fragment implements Callback {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SuivreCommandeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SuivreCommandeFragment newInstance(String param1, String param2) {
         SuivreCommandeFragment fragment = new SuivreCommandeFragment();
         Bundle args = new Bundle();
@@ -54,14 +46,51 @@ public class SuivreCommandeFragment extends Fragment {
         }
     }
 
+
+    private TextView tvTest;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_suivre_commande, container, false);
+        View v = inflater.inflate(R.layout.fragment_suivre_commande, container, false);
+
+
+        tvTest = (TextView) v.findViewById(R.id.tv_test);
+
+
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(getString(R.string.server))
+                .build();
+
+        WebService service = restAdapter.create(WebService.class);
+
+        String username = ApplicationManager.userCredentials.getUsername();
+        String password = ApplicationManager.userCredentials.getPassword();
+
+
+
+        service.listerRestaurants(username,password,this);
+
+
+
+
+        return v;
     }
 
 
+    @Override
+    public void success(Object o, Response response) {
+        ArrayList<Restaurant> restaurants = (ArrayList<Restaurant>) o;
+
+        tvTest.setText(restaurants.get(1).getMenus().get(0).getPlats().get(0).getNom());
 
 
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+        tvTest.setText("error");
+    }
 }

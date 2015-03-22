@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gnut3ll4.restomobile.model.User;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -73,7 +75,7 @@ public class LoginActivity extends ActionBarActivity implements Callback {
 
         if (o != null) {
             User user = (User) o;
-            if (user.error != null) {
+            if (user.getError() != null) {
                 passwordEditText.setError(getString(R.string.error_invalid_pwd));
                 passwordEditText.requestFocus();
             } else {
