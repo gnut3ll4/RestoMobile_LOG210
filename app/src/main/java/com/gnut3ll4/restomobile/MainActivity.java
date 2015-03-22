@@ -50,8 +50,9 @@ public class MainActivity extends ActionBarActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
 
 
         mTitle = mDrawerTitle = getTitle();
@@ -73,7 +74,7 @@ public class MainActivity extends ActionBarActivity  {
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 mDrawerLayout,
-                toolbar,
+//                toolbar,
                 R.string.drawer_open,
                 R.string.drawer_close
         ) {
@@ -97,6 +98,14 @@ public class MainActivity extends ActionBarActivity  {
         if (savedInstanceState == null) {
             selectItem(0);
         }
+
+
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
 
     }
@@ -171,26 +180,20 @@ public class MainActivity extends ActionBarActivity  {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-
-        switch (item.getItemId()) {
-            case R.id.action_disconnect:
-                ApplicationManager.deconnexion(this);
-                return true;
-
-
-        }
 
         int id = item.getItemId();
-
-
-
-
+        if (id == R.id.action_disconnect) {
+            ApplicationManager.deconnexion(this);
+        }
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        else if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+
+
     }
 
 
