@@ -6,6 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.gnut3ll4.restomobile.model.Plat;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Created by gnut3ll4 on 16/03/15.
  */
@@ -13,6 +19,7 @@ public class ApplicationManager extends Application {
 
 
     public static UserCredentials userCredentials;
+    public static HashMap<Plat,Integer> panier;
 
     @Override
     public void onCreate() {
@@ -25,6 +32,7 @@ public class ApplicationManager extends Application {
             userCredentials = new UserCredentials(u, p);
         }
 
+        panier = new HashMap<>();
 
     }
 

@@ -4,6 +4,13 @@
     tools:context=".MainActivity">
 
     <item
+        android:id="@+id/action_panier"
+        android:orderInCategory="10"
+        android:title="Panier"
+        android:icon="@drawable/shopping_cart"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_disconnect"
         android:orderInCategory="90"
         android:title="@string/action_disconnect"
