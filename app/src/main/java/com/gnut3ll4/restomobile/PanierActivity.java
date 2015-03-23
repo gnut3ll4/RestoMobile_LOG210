@@ -1,5 +1,6 @@
 package com.gnut3ll4.restomobile;
 
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -63,6 +64,14 @@ public class PanierActivity extends ActionBarActivity {
             public void onChanged() {
                 super.onChanged();
                 refreshTotal();
+            }
+        });
+
+        commandeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PanierActivity.this, SendCommande.class);
+                PanierActivity.this.startActivity(i);
             }
         });
 

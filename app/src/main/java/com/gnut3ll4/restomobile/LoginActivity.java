@@ -87,6 +87,26 @@ public class LoginActivity extends ActionBarActivity implements Callback {
                 securePreferences.edit().putString(userCredentials.PASSWORD, userCredentials.getPassword()).commit();
 
 
+                securePreferences.edit().putString("UserId", ""+user.getId()).commit();
+                securePreferences.edit().putString("UserType", user.getType()+"").commit();
+                securePreferences.edit().putString("UserPrenom",user.getPrenom()).commit();
+                securePreferences.edit().putString("UserNom", user.getNom()).commit();
+                securePreferences.edit().putString("UserAdresse", user.getAdresse()).commit();
+                securePreferences.edit().putString("UserAltAdresse", user.getAltAdresse()).commit();
+                securePreferences.edit().putString("UserTelephone", user.getTelephone()).commit();
+                securePreferences.edit().putString("UserDateNaiss", user.getDateNaissance()).commit();
+
+
+
+
+
+
+
+
+
+
+                
+                
                 finishActivity(1);
                 startActivity(new Intent(this, MainActivity.class));
                 finish();

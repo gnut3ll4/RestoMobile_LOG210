@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.gnut3ll4.restomobile.model.Plat;
+import com.gnut3ll4.restomobile.model.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class ApplicationManager extends Application {
 
     public static UserCredentials userCredentials;
     public static HashMap<Plat,Integer> panier;
+    public static User user;
 
     @Override
     public void onCreate() {
@@ -30,6 +32,20 @@ public class ApplicationManager extends Application {
 
         if (u.length() > 0 && p.length() > 0) {
             userCredentials = new UserCredentials(u, p);
+        }
+
+
+        String id = securePreferences.getString("UserId", "");
+        String type = securePreferences.getString("UserType", "");
+        String prenom = securePreferences.getString("UserPrenom", "");
+        String nom = securePreferences.getString("UserNom", "");
+        String adresse = securePreferences.getString("UserAdresse", "");
+        String altAdresse =  securePreferences.getString("UserAltAdresse", "");
+        String telephone = securePreferences.getString("UserTelephone", "");
+        String dateNaissance = securePreferences.getString("UserDateNaiss", "");
+
+        if(id.length()>0 && type.length()>0) {
+            user = new User(Integer.valueOf(id),Integer.valueOf(type),prenom,nom,adresse, altAdresse, telephone, dateNaissance);
         }
 
         panier = new HashMap<>();

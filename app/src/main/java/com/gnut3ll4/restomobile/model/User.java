@@ -18,7 +18,19 @@ public class User {
     String altAdresse;
     String telephone;
 
+    public User(int id, int type, String prenom, String nom, String adresse, String altAdresse, String telephone, String dateNaissance) {
+        this.id = id;
+        this.type = type;
+        this.prenom = prenom;
+        this.nom = nom;
+        this.adresse = adresse;
+        this.altAdresse = altAdresse;
+        this.telephone = telephone;
+        this.dateNaissance = dateNaissance;
+    }
+
     @SerializedName("date_naissance")
+
     String dateNaissance;
 
     public int getId() {

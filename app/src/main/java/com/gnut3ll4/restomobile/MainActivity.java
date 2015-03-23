@@ -95,9 +95,19 @@ public class MainActivity extends ActionBarActivity  {
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        if (savedInstanceState == null) {
-            selectItem(0);
+        if (ApplicationManager.userCredentials == null) {
+
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivityForResult(intent, 0);
+
+        } else {
+            if (savedInstanceState == null) {
+                selectItem(0);
+            }
+
         }
+
+
 
 
     }
@@ -184,6 +194,11 @@ public class MainActivity extends ActionBarActivity  {
         int id = item.getItemId();
         if (id == R.id.action_disconnect) {
             ApplicationManager.deconnexion(this);
+        }
+
+        if(id == R.id.action_panier){
+            Intent i = new Intent(MainActivity.this, PanierActivity.class);
+            MainActivity.this.startActivity(i);
         }
         // Pass the event to ActionBarDrawerToggle, if it returns
         // true, then it has handled the app icon touch event
