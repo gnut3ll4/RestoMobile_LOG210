@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -70,7 +69,7 @@ public class PanierActivity extends ActionBarActivity {
         commandeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PanierActivity.this, SendCommande.class);
+                Intent i = new Intent(PanierActivity.this, SendCommandeActivity.class);
                 PanierActivity.this.startActivity(i);
             }
         });

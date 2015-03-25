@@ -1,60 +1,45 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="15dp"
     android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:layout_marginTop="15dp"
-    android:orientation="vertical"
-    tools:context="com.gnut3ll4.restomobile.SendCommande">
+    tools:context="com.gnut3ll4.restomobile.SendCommandeActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Adresse de livraison"/>
-
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/radioButton2"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New RadioButton" />
+            android:text="Adresse de livraison" />
 
-        <RadioButton
-            android:id="@+id/radioButton1"
+        <RadioGroup
+            android:id="@+id/radiogroup"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/etxt_date"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="New RadioButton" />
+            android:hint="Date" />
 
-    </RadioGroup>
+        <EditText
+            android:id="@+id/etxt_heure"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Heure" />
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Envoyer commande" />
 
-        <DatePicker
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:scaleY="0.5"
-            android:scaleX="0.5"
-            android:calendarViewShown="false"
-            android:id="@+id/datePicker" />
-
-        <TimePicker
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:scaleY="0.5"
-            android:scaleX="0.5"
-            android:layout_below="@+id/datePicker"
-            android:id="@+id/timePicker" />
-
-        </RelativeLayout>
-
-
-
-
-</LinearLayout>
+</RelativeLayout>
