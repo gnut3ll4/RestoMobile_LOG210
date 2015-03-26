@@ -195,6 +195,12 @@ public class MainActivity extends ActionBarActivity  {
         if (id == R.id.action_disconnect) {
             ApplicationManager.deconnexion(this);
         }
+        else if(id==R.id.action_settings)
+        {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
 
         if(id == R.id.action_panier){
             Intent i = new Intent(MainActivity.this, PanierActivity.class);

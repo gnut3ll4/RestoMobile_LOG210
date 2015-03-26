@@ -1,0 +1,15 @@
+<resources>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_display_name">Host URL</string>
+    <string name="pref_default_display_name">http://74.56.95.74:255</string>
+
+    <string name="pref_title_root_directory">Host Root Directory</string>
+    <string name="pref_default_root_directory"></string>
+
+</resources>
