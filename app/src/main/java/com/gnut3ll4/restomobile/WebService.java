@@ -1,5 +1,6 @@
 package com.gnut3ll4.restomobile;
 
+import com.gnut3ll4.restomobile.model.Commande;
 import com.gnut3ll4.restomobile.model.Restaurant;
 import com.gnut3ll4.restomobile.model.TestHello;
 import com.gnut3ll4.restomobile.model.User;
@@ -41,5 +42,9 @@ public interface WebService {
             @Field("adrLivre") String adrLivre,
             @Field("listePlats") JSONArray jsonArray,
             Callback<Response> callback);
+
+    @FormUrlEncoded
+    @POST("/log210/LOG210/api.php/commande/client/list")
+    void listerCommandes(@Field("username") String username, @Field("password") String password,Callback<ArrayList<Commande>> callback);
 
 }

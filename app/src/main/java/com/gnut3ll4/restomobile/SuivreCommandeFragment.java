@@ -1,15 +1,23 @@
 package com.gnut3ll4.restomobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gnut3ll4.restomobile.adapters.CommandeAdapter;
+import com.gnut3ll4.restomobile.adapters.RestaurantsAdapter;
+import com.gnut3ll4.restomobile.model.Commande;
 import com.gnut3ll4.restomobile.model.Restaurant;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit.Callback;
@@ -47,8 +55,10 @@ public class SuivreCommandeFragment extends Fragment implements Callback {
     }
 
 
-    private TextView tvTest;
-
+    private ListView listeViewCommandes;
+    private CommandeAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private WebService service;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,41 +66,49 @@ public class SuivreCommandeFragment extends Fragment implements Callback {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_suivre_commande, container, false);
 
-
-        tvTest = (TextView) v.findViewById(R.id.tv_test);
+        listeViewCommandes = (ListView) v.findViewById(R.id.listview_commande);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
 
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(getString(R.string.server))
                 .build();
 
-        WebService service = restAdapter.create(WebService.class);
+        service = restAdapter.create(WebService.class);
 
         String username = ApplicationManager.userCredentials.getUsername();
         String password = ApplicationManager.userCredentials.getPassword();
 
+        service.listerCommandes(username,password,this);
 
-
-        service.listerRestaurants(username,password,this);
-
-
-
-
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                String username = ApplicationManager.userCredentials.getUsername();
+                String password = ApplicationManager.userCredentials.getPassword();
+                service.listerCommandes(username,password,SuivreCommandeFragment.this);
+            }
+        });
         return v;
     }
 
 
     @Override
     public void success(Object o, Response response) {
-        ArrayList<Restaurant> restaurants = (ArrayList<Restaurant>) o;
+        swipeRefreshLayout.setRefreshing(false);
+        final ArrayList<Commande> commandes = (ArrayList<Commande>) o;
 
-        tvTest.setText(restaurants.get(1).getMenus().get(0).getPlats().get(0).getNom());
+
+        adapter = new CommandeAdapter(getActivity(),R.layout.row_etat_commande,commandes);
+        listeViewCommandes.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
 
 
     }
 
     @Override
     public void failure(RetrofitError error) {
-        tvTest.setText("error");
+
     }
 }

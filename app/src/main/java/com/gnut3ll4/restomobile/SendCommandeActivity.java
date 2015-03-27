@@ -166,8 +166,6 @@ public class SendCommandeActivity extends ActionBarActivity implements Callback 
 
             }
         });
-
-
     }
 
     @Override
