@@ -36,9 +36,6 @@ public class PanierActivity extends ActionBarActivity {
         tvTotal = (TextView) findViewById(R.id.tv_total_price);
 
 
-
-
-
         ArrayList<Map.Entry<Plat,Integer>> listPlats = new ArrayList<>();
 
         float totalPrice = 0;
