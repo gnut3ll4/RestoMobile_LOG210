@@ -22,19 +22,19 @@ import retrofit.http.POST;
  */
 public interface WebService {
 
-    @GET("/log210/LOG210/api.php/api")
+    @GET("/api.php/api")
     void helloWorld(Callback<TestHello> callback);
 
     @FormUrlEncoded
-    @POST("/log210/LOG210/api.php/login")
+    @POST("/api.php/login")
     void login(@Field("username") String username, @Field("password") String password,Callback<User> callback);
 
     @FormUrlEncoded
-    @POST("/log210/LOG210/api.php/restaurant/list")
+    @POST("/api.php/restaurant/list")
     void listerRestaurants(@Field("username") String username, @Field("password") String password,Callback<ArrayList<Restaurant>> callback);
 
     @FormUrlEncoded
-    @POST("/log210/LOG210/api.php/commande/add")
+    @POST("/api.php/commande/add")
     void ajouterCommande(
             @Field("username") String username,
             @Field("password") String password,
@@ -44,7 +44,7 @@ public interface WebService {
             Callback<Response> callback);
 
     @FormUrlEncoded
-    @POST("/log210/LOG210/api.php/commande/client/list")
+    @POST("/api.php/commande/client/list")
     void listerCommandes(@Field("username") String username, @Field("password") String password,Callback<ArrayList<Commande>> callback);
 
 }

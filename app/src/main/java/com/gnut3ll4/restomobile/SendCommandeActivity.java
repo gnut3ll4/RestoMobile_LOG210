@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
@@ -48,6 +49,7 @@ public class SendCommandeActivity extends ActionBarActivity implements Callback 
     private SimpleDateFormat timeFormatter;
 
     private RadioGroup radioGroup;
+    private ProgressBar progressBar;
 
     private Button btnSendCommande;
 
@@ -57,6 +59,9 @@ public class SendCommandeActivity extends ActionBarActivity implements Callback 
         setContentView(R.layout.activity_send_commande);
 
         radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.GONE);
 
         final RadioButton radioButtonAdresse = new RadioButton(this);
         radioButtonAdresse.setText(ApplicationManager.user.getAdresse());
@@ -163,7 +168,7 @@ public class SendCommandeActivity extends ActionBarActivity implements Callback 
                 }
 
                 service.ajouterCommande(username,password,date,adresse,jsonArray,SendCommandeActivity.this);
-
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -186,6 +191,7 @@ public class SendCommandeActivity extends ActionBarActivity implements Callback 
 
     @Override
     public void success(Object o, Response response) {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(this,"Votre commande a bien été prise en compte !",Toast.LENGTH_SHORT).show();
         ApplicationManager.panier = new HashMap<>();
         Intent i = new Intent(SendCommandeActivity.this, MainActivity.class);
