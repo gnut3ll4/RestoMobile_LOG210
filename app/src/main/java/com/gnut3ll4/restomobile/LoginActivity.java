@@ -3,6 +3,7 @@ package com.gnut3ll4.restomobile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ public class LoginActivity extends ActionBarActivity implements Callback {
     private EditText passwordEditText;
     private Button loginButton;
     private UserCredentials userCredentials;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     private WebService service;
 
@@ -131,5 +133,29 @@ public class LoginActivity extends ActionBarActivity implements Callback {
     @Override
     public void failure(RetrofitError error) {
         Toast.makeText(this,error.getMessage(),Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if(id==R.id.action_settings)
+        {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        else if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
